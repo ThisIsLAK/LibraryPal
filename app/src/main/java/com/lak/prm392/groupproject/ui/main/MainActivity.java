@@ -9,6 +9,9 @@ import androidx.work.*;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.lak.prm392.groupproject.R;
 //import com.lak.prm392.groupproject.ui.fragment.*;
+import com.lak.prm392.groupproject.data.local.database.AppDatabase;
+import com.lak.prm392.groupproject.data.local.entities.Review;
+import com.lak.prm392.groupproject.data.local.entities.User;
 import com.lak.prm392.groupproject.worker.ReminderWorker;
 
 import java.util.concurrent.TimeUnit;
@@ -35,6 +38,28 @@ public class MainActivity extends AppCompatActivity {
         if (!"admin".equalsIgnoreCase(userRole)) {
             bottomNavigationView.getMenu().removeItem(R.id.menu_admin);
         }
+
+        new Thread(() -> {
+            AppDatabase db = AppDatabase.getInstance(getApplicationContext());
+
+            // Insert user
+            User user = new User();
+            user.name = "Minh";
+            user.email = "minh@example.com";
+            user.password = "123";
+            user.role = "student";
+            db.userDao().insertUser(user);
+
+            // Insert review
+            Review review = new Review();
+            review.userId = 1;
+            review.bookId = 1;
+            review.comment = "Giáo trình chi tiết, thực hành tốt!";
+            review.rating = 4;
+            review.createdAt = "2025-07-07";
+            db.reviewDao().insertReview(review);
+        }).start();
+
 
         // Load tab mặc định
 //        loadFragment(new BookListFragment());
