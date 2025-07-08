@@ -2,55 +2,75 @@ package com.lak.prm392.groupproject.ui.main;
 
 import android.os.Bundle;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.work.Constraints;
-import androidx.work.ExistingPeriodicWorkPolicy;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkManager;
+import androidx.fragment.app.Fragment;
+import androidx.work.*;
 
-import com.lak.prm392.groupproject.R;
-import com.lak.prm392.groupproject.worker.ReminderWorker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.lak.prm392.groupproject.R;
+//import com.lak.prm392.groupproject.ui.fragment.*;
+import com.lak.prm392.groupproject.worker.ReminderWorker;
 
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String userRole; // student / teacher / admin
-    private BottomNavigationView bottomNavigationView; // nếu bạn có dùng
+    private String userRole;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // 🔐 Lấy role từ intent truyền từ LoginActivity
-        userRole = getIntent().getStringExtra("user_role");
-
-        // 📦 Gắn logic phân quyền (VD: toast tạm thời test)
-        Toast.makeText(this, "Bạn đang đăng nhập với quyền: " + userRole, Toast.LENGTH_SHORT).show();
-
-        // Nếu bạn dùng BottomNavigationView thì có thể tùy biến menu ở đây
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        if (bottomNavigationView != null) {
-            if (!"admin".equals(userRole)) {
-                bottomNavigationView.getMenu().removeItem(R.id.menu_admin); // ẩn tab Admin nếu không phải admin
-            }
-            if (!"teacher".equals(userRole)) {
-                bottomNavigationView.getMenu().removeItem(R.id.menu_request); // nếu có tab yêu cầu sách cho teacher
-            }
+        userRole = getIntent().getStringExtra("user_role");
+
+        Toast.makeText(this, "Đăng nhập với vai trò: " + userRole, Toast.LENGTH_SHORT).show();
+
+        // Ẩn menu tab theo role
+        if (!"teacher".equalsIgnoreCase(userRole)) {
+            bottomNavigationView.getMenu().removeItem(R.id.menu_request);
+        }
+        if (!"admin".equalsIgnoreCase(userRole)) {
+            bottomNavigationView.getMenu().removeItem(R.id.menu_admin);
         }
 
-        // 🕑 Chạy định kỳ WorkManager nhắc hạn trả sách (đã có sẵn)
+        // Load tab mặc định
+//        loadFragment(new BookListFragment());
+//
+//        // Navigation item
+//        bottomNavigationView.setOnItemSelectedListener(item -> {
+//            Fragment selectedFragment = null;
+//            switch (item.getItemId()) {
+//                case R.id.menu_home:
+//                    selectedFragment = new BookListFragment();
+//                    break;
+//                case R.id.menu_history:
+//                    selectedFragment = new HistoryFragment();
+//                    break;
+//                case R.id.menu_request:
+//                    selectedFragment = new RequestFragment();
+//                    break;
+//                case R.id.menu_admin:
+//                    selectedFragment = new AdminFragment();
+//                    break;
+//            }
+//            if (selectedFragment != null) {
+//                loadFragment(selectedFragment);
+//                return true;
+//            }
+//            return false;
+//        });
+
+        // WorkManager định kỳ
         Constraints constraints = new Constraints.Builder()
                 .setRequiresBatteryNotLow(true)
                 .build();
 
         PeriodicWorkRequest reminderWork = new PeriodicWorkRequest.Builder(
                 ReminderWorker.class,
-                1, TimeUnit.DAYS // chạy mỗi ngày
+                1, TimeUnit.DAYS
         ).setConstraints(constraints).build();
 
         WorkManager.getInstance(this).enqueueUniquePeriodicWork(
@@ -59,4 +79,31 @@ public class MainActivity extends AppCompatActivity {
                 reminderWork
         );
     }
+
+//    private void loadFragment(Fragment fragment) {
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.main_fragment_container, fragment)
+//                .commit();
+//    }
+//
+//    public class BookListFragment extends Fragment {
+//        public BookListFragment() {
+//            super(R.layout.fragment_book_list);
+//        }
+//    }
+//    public class HistoryFragment extends Fragment {
+//        public HistoryFragment() {
+//            super(R.layout.fragment_history);
+//        }
+//    }
+//    public class RequestFragment extends Fragment {
+//        public RequestFragment() {
+//            super(R.layout.fragment_request);
+//        }
+//    }
+//    public class AdminFragment extends Fragment {
+//        public AdminFragment() {
+//            super(R.layout.fragment_admin);
+//        }
+//    }
 }

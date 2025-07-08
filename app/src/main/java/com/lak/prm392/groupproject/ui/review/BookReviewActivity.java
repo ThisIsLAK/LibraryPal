@@ -16,12 +16,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class BookReviewActivity extends AppCompatActivity {
     private int bookId, userId;
     private EditText commentEditText;
     private RatingBar ratingBar;
     private Button submitButton;
     private ReviewRepository reviewRepository;
+    private RecyclerView recyclerView;
+    private ReviewAdapter reviewAdapter;
+    private List<Review> reviewList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +46,14 @@ public class BookReviewActivity extends AppCompatActivity {
         commentEditText = findViewById(R.id.editTextComment);
         ratingBar = findViewById(R.id.ratingBar);
         submitButton = findViewById(R.id.buttonSubmitReview);
+        recyclerView = findViewById(R.id.recyclerViewReviews);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        reviewAdapter = new ReviewAdapter(reviewList);
+        recyclerView.setAdapter(reviewAdapter);
+
+        loadReviews(); // gọi hàm tải danh sách
+
 
         submitButton.setOnClickListener(v -> {
             String comment = commentEditText.getText().toString();
@@ -52,8 +71,21 @@ public class BookReviewActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     Toast.makeText(this, "Đánh giá thành công", Toast.LENGTH_SHORT).show();
                     finish();
+                    loadReviews();
                 });
             }).start();
         });
     }
+
+    private void loadReviews() {
+        new Thread(() -> {
+            List<Review> reviews = reviewRepository.getReviewsByBookId(bookId);
+            runOnUiThread(() -> {
+                reviewList.clear();
+                reviewList.addAll(reviews);
+                reviewAdapter.notifyDataSetChanged();
+            });
+        }).start();
+    }
+
 }
