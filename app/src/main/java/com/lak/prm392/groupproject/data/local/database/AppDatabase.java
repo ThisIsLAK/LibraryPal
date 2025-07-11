@@ -10,7 +10,7 @@ import com.lak.prm392.groupproject.data.local.dao.UserDao;
 import com.lak.prm392.groupproject.data.local.entities.Review;
 import com.lak.prm392.groupproject.data.local.entities.User;
 
-@Database(entities = {User.class, Review.class}, version = 1)
+@Database(entities = {User.class, Review.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
 
