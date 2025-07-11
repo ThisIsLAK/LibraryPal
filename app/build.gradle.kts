@@ -39,6 +39,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.work.runtime)
     implementation("androidx.room:room-runtime:2.6.1")
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("com.google.android.material:material:1.11.0")
     annotationProcessor("androidx.room:room-compiler:2.6.1") // dùng Java thì annotationProcessor
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
