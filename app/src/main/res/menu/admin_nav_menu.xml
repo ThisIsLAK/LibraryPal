@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_dashboard" android:title="Dashboard"/>
+    <item android:id="@+id/nav_manage_users" android:title="Quản lý người dùng"/>
+    <item android:id="@+id/nav_manage_books" android:title="Quản lý sách"/>
+    <item android:id="@+id/nav_manage_violations" android:title="Quản lý vi phạm"/>
+    <item android:id="@+id/nav_logout" android:title="Đăng xuất"/>
+</menu>

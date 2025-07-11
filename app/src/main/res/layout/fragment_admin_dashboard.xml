@@ -1,0 +1,54 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTotalUsers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tổng người dùng: 0"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tvTotalBooks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tổng sách: 0"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Spinner chọn mốc thời gian -->
+        <Spinner
+            android:id="@+id/spinnerTimeRange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+
+        <!-- Biểu đồ top sách mượn -->
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChartTopBooks"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="16dp" />
+
+        <!-- Biểu đồ vi phạm -->
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChartViolations"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="16dp" />
+
+        <!-- Biểu đồ sách mượn -->
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChartBorrow"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</ScrollView>

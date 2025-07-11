@@ -19,5 +19,9 @@ public class User {
 
     @NonNull
     public String role; // student, teacher, admin
+
+    public int violationCount = 0;       // Số lần vi phạm
+    public boolean isBanned = false;     // Có bị ban không
+    public String banUntil = null;       // Thời gian ban đến (nếu có)
 }
 
