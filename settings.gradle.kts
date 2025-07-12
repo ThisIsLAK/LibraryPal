@@ -23,4 +23,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "GroupProject"
 include(":app")
- 
+include(":app:manifest")
