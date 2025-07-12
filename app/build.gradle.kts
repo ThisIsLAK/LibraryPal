@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.lak.prm392.groupproject"
+    namespace = "com.example.toshokan"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.lak.prm392.groupproject"
+        applicationId = "com.example.toshokan"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -37,9 +37,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.work.runtime)
-    implementation("androidx.room:room-runtime:2.6.1")
-    annotationProcessor("androidx.room:room-compiler:2.6.1") // dùng Java thì annotationProcessor
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
