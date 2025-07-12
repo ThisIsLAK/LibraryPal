@@ -1,14 +1,16 @@
 package com.lak.prm392.groupproject.ui.main;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.work.*;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.lak.prm392.groupproject.R;
-//import com.lak.prm392.groupproject.ui.fragment.*;
 import com.lak.prm392.groupproject.data.local.database.AppDatabase;
 import com.lak.prm392.groupproject.data.local.entities.Review;
 import com.lak.prm392.groupproject.data.local.entities.User;
@@ -60,33 +62,31 @@ public class MainActivity extends AppCompatActivity {
             db.reviewDao().insertReview(review);
         }).start();
 
+        loadFragment(new BookListFragment());
 
-        // Load tab mặc định
-//        loadFragment(new BookListFragment());
-//
-//        // Navigation item
-//        bottomNavigationView.setOnItemSelectedListener(item -> {
-//            Fragment selectedFragment = null;
-//            switch (item.getItemId()) {
-//                case R.id.menu_home:
-//                    selectedFragment = new BookListFragment();
-//                    break;
-//                case R.id.menu_history:
-//                    selectedFragment = new HistoryFragment();
-//                    break;
-//                case R.id.menu_request:
-//                    selectedFragment = new RequestFragment();
-//                    break;
-//                case R.id.menu_admin:
-//                    selectedFragment = new AdminFragment();
-//                    break;
-//            }
-//            if (selectedFragment != null) {
-//                loadFragment(selectedFragment);
-//                return true;
-//            }
-//            return false;
-//        });
+        // Navigation item
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment = null;
+                int id = item.getItemId();
+                if (id == R.id.menu_home) {
+                    selectedFragment = new BookListFragment();
+                } else if (id == R.id.menu_history) {
+                    selectedFragment = new HistoryFragment();
+                } else if (id == R.id.menu_request) {
+                    selectedFragment = new RequestFragment();
+                } else if (id == R.id.menu_admin) {
+                    selectedFragment = new AdminFragment();
+                }
+
+                if (selectedFragment != null) {
+                    loadFragment(selectedFragment);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         // WorkManager định kỳ
         Constraints constraints = new Constraints.Builder()
@@ -105,30 +105,30 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-//    private void loadFragment(Fragment fragment) {
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.main_fragment_container, fragment)
-//                .commit();
-//    }
-//
-//    public class BookListFragment extends Fragment {
-//        public BookListFragment() {
-//            super(R.layout.fragment_book_list);
-//        }
-//    }
-//    public class HistoryFragment extends Fragment {
-//        public HistoryFragment() {
-//            super(R.layout.fragment_history);
-//        }
-//    }
-//    public class RequestFragment extends Fragment {
-//        public RequestFragment() {
-//            super(R.layout.fragment_request);
-//        }
-//    }
-//    public class AdminFragment extends Fragment {
-//        public AdminFragment() {
-//            super(R.layout.fragment_admin);
-//        }
-//    }
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, fragment)
+                .commit();
+    }
+
+    public class BookListFragment extends Fragment {
+        public BookListFragment() {
+            super(R.layout.fragment_book_list);
+        }
+    }
+    public class HistoryFragment extends Fragment {
+        public HistoryFragment() {
+            super(R.layout.fragment_history);
+        }
+    }
+    public class RequestFragment extends Fragment {
+        public RequestFragment() {
+            super(R.layout.fragment_request);
+        }
+    }
+    public class AdminFragment extends Fragment {
+        public AdminFragment() {
+            super(R.layout.fragment_admin);
+        }
+    }
 }
