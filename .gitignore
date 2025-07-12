@@ -1,54 +1,15 @@
-# --- Android Studio & IntelliJ project files ---
-.idea/
 *.iml
-*.ipr
-*.iws
-
-# --- Local configuration (do not share SDK paths, keys, etc.) ---
-local.properties
-
-# --- Gradle files and caches ---
-.gradle/
-build/
-captures/
-output.json
-*.log
-
-# --- Gradle Wrapper jar (keep the wrapper itself) ---
-!gradle/wrapper/gradle-wrapper.jar
-
-# --- Temporary/lock/hash files ---
-**/build/
-**/.gradle/
-**/captures/
-**/outputs/
-**/intermediates/
-**/incremental/
-**/tmp/
-**/fileHashes/
-**/checksums/
-**/*.lock
-**/*.bin
-
-# --- NDK/CMake generated files ---
-.cxx/
-.externalNativeBuild/
-obj/
-
-# --- Proguard files ---
-proguard/
-proguard-rules.pro
-
-# --- Misc OS generated files ---
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
 .DS_Store
-Thumbs.db
-
-# --- VS Code ---
-.vscode/
-
-# --- Node (nếu có) ---
-node_modules/
-
-# --- Keystore (do not share signing keys) ---
-*.jks
-*.*
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
