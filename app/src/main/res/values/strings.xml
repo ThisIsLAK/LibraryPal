@@ -16,5 +16,6 @@
         <item>Week</item>
         <item>Month</item>
     </string-array>
+    <string name="add_book">Thêm sách</string>
 
 </resources>
