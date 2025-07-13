@@ -1,4 +1,4 @@
-package com.example.toshokan;
+package com.lak.prm392.groupproject.ui.book;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.toshokan.adapter.BookAdapter;
-import com.example.toshokan.model.Book;
-
-import java.util.List;
 
 public class BookListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;

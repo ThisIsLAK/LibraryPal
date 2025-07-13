@@ -1,4 +1,4 @@
-package com.example.toshokan;
+package com.lak.prm392.groupproject.ui.book;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.toshokan.model.Book;
-import com.example.toshokan.R;
+import com.lak.prm392.groupproject.R;
 
 public class BookDetailActivity extends AppCompatActivity {
     private ImageView imgDetail;

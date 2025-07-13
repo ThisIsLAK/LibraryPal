@@ -1,16 +1,14 @@
-package com.example.toshokan.adapter;
+package com.lak.prm392.groupproject.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.toshokan.R;
 import com.example.toshokan.model.BorrowLog;
+import com.lak.prm392.groupproject.R;
 
 import java.util.List;
 

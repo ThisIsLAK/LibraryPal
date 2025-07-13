@@ -37,7 +37,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.work.runtime)
     implementation("androidx.room:room-runtime:2.6.1")
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation ("com.google.android.material:material:1.11.0")

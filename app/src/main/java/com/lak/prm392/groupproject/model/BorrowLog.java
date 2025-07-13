@@ -1,4 +1,4 @@
-package com.example.toshokan.model;
+package com.lak.prm392.groupproject.model;
 
 public class BorrowLog {
     private int id;

@@ -1,4 +1,4 @@
-package com.example.toshokan;
+package com.lak.prm392.groupproject.ui.book;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.toshokan.adapter.BorrowHistoryAdapter;
 import com.example.toshokan.model.Book;
-
-import java.util.List;
 
 public class BorrowHistoryActivity extends AppCompatActivity {
     private RecyclerView recyclerViewHistory;
